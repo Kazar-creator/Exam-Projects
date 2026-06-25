@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Calcolatrice</title>
+    <link rel="stylesheet" href="style.css">
+
+    <body>
+        <div style="border: 1px solid black;">
+            <input type="text" id="display" disabled style="border: 1px solid black;">
+            <div class="buttons"></div>
+                <button onclick="aggiungi('1')">1</button>
+                <button onclick="aggiungi('2')">2</button> 
+                <button onclick="aggiungi('3')">3</button>
+            <div style="border: 1px solid black;"></div>
+                <button onclick="aggiungi('4')">4</button>
+                <button onclick="aggiungi('5')">5</button>
+                <button onclick="aggiungi('6')">6</button>
+            <div style="border: 1px solid black;"></div>
+                <button onclick="aggiungi('7')">7</button>
+                <button onclick="aggiungi('8')">8</button>
+                <button onclick="aggiungi('9')">9</button>
+            <div style="border: 1px solid black;"></div>
+                <button onclick="aggiungi('0')">0</button>
+                <button onclick="aggiungi('-')">-</button>
+                <button onclick="aggiungi('+')">+</button>
+            <div style="border: 1px solid black;"></div>
+                <button onclick="aggiungi('/')">/</button>
+                <button onclick="aggiungi('*')">*</button>
+                <button onclick="calcola()">=</button>
+                <button onclick="document.getElementById('display').value(0, -1);">C</button>
+
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <script>
+        function aggiungi(cifra) {
+            document.getElementById('display').value = 
+            document.getElementById('display').value + cifra;
+        }
+        </script>
+
+    </body>
+    </head>
+</html>

@@ -1,0 +1,93 @@
+<html>
+<head>
+    <title>Bancomat Semplice</title>
+</head>
+<body style="text-align: center; margin-top: 50px; font-family: sans-serif;">
+
+    <div style="border: 2px solid black; width: 350px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
+        
+        <!-- DISPLAY -->
+        <input id="display" value="INSERIRE PIN" style="width: 280px; height: 40px; text-align: center; font-size: 18px; margin-bottom: 20px;" readonly>
+
+        <!-- SCHERMATA PIN (Tastierino) -->
+        <div id="schermata_pin">
+            <div style="margin-bottom: 5px;">
+                <button type="button" onclick="pulisci(); document.getElementById('display').value += '1'"> 1 </button>
+                <button type="button" onclick="pulisci(); document.getElementById('display').value += '2'"> 2 </button>
+                <button type="button" onclick="pulisci(); document.getElementById('display').value += '3'"> 3 </button>
+            </div>
+            <div style="margin-bottom: 5px;">
+                <button type="button" onclick="pulisci(); document.getElementById('display').value += '4'"> 4 </button>
+                <button type="button" onclick="pulisci(); document.getElementById('display').value += '5'"> 5 </button>
+                <button type="button" onclick="pulisci(); document.getElementById('display').value += '6'"> 6 </button>
+            </div>
+            <div style="margin-bottom: 5px;">
+                <button type="button" onclick="pulisci(); document.getElementById('display').value += '7'"> 7 </button>
+                <button type="button" onclick="pulisci(); document.getElementById('display').value += '8'"> 8 </button>
+                <button type="button" onclick="pulisci(); document.getElementById('display').value += '9'"> 9 </button>
+            </div>
+            <div style="margin-bottom: 10px;">
+                <button type="button" onclick="document.getElementById('display').value = ''"> C </button>
+                <button type="button" onclick="pulisci(); document.getElementById('display').value += '0'"> 0 </button>
+                <button type="button" onclick="verifica()" style="background-color: green; color: white;"> ENTRA </button>
+            </div>
+        </div>
+
+        <!-- SCHERMATA MENU (Nascosta) -->
+        <div id="schermata_menu" style="display: none;">
+            <button type="button" onclick="mostraSaldo()" style="width: 200px; margin-bottom: 10px;"> VEDI SALDO </button>
+            <div style="margin-top: 10px;">
+                <button type="button" onclick="preleva(20)"> PRELEVA 20euro </button>
+                <button type="button" onclick="preleva(50)"> PRELEVA 50euro </button>
+            </div>
+            <div style="margin-top: 25px;">
+                <button type="button" onclick="esci()" style="background-color: red; color: white; width: 120px;"> ESCI </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // DATI DI DEFAULT
+        const PIN_GIUSTO = "22222";
+        let saldo = 500; // Il saldo parte da 500 per difetto
+
+        function pulisci() {
+            const d = document.getElementById('display');
+            if (d.value === "INSERIRE PIN" || d.value === "PIN ERRATO" || d.value === "ARRIVEDERCI" || d.value.includes("SALDO") || d.value.includes("PRELEVATI")) {
+                d.value = "";
+            }
+        }
+
+        function verifica() {
+            if (document.getElementById('display').value === PIN_GIUSTO) {
+                document.getElementById('display').value = "BENVENUTO";
+                document.getElementById('schermata_pin').style.display = "none";
+                document.getElementById('schermata_menu').style.display = "block";
+            } else {
+                document.getElementById('display').value = "PIN ERRATO";
+            }
+        }
+
+        function mostraSaldo() {
+            document.getElementById('display').value = "SALDO ATTUALE: " + saldo + "euro";
+        }
+
+        function preleva(quantita) {
+            if (saldo >= quantita) {
+                saldo = saldo - quantita;
+                document.getElementById('display').value = "PRELEVATI " + quantita + "euro";
+            } else {
+                document.getElementById('display').value = "SALDO INSUFFICIENTE";
+            }
+        }
+
+        function esci() {
+            document.getElementById('display').value = "ARRIVEDERCI";
+            document.getElementById('schermata_pin').style.display = "block";
+            document.getElementById('schermata_menu').style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
